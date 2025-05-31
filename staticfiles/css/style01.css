@@ -1,0 +1,134 @@
+/* Reset */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  border: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background-color: #000;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Button */
+button {
+  --primary-color: #645bff;
+  --secondary-color: #fff;
+  --hover-color: #333;
+  --arrow-width: 10px;
+  --arrow-stroke: 2px;
+
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-radius: 20px;
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+button .arrow {
+  width: var(--arrow-width);
+  height: var(--arrow-stroke);
+  background-color: var(--secondary-color);
+  position: relative;
+}
+
+button .arrow::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: 2px;
+  border: solid var(--secondary-color);
+  border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+  padding: 3px;
+  transform: rotate(-45deg);
+}
+
+button:hover .arrow::before {
+  right: 0;
+}
+
+/* About Section */
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90vw;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.about1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about1 img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid #000;
+  object-fit: cover;
+}
+
+.about2 {
+  flex: 2;
+  background-color: #afafaf;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #000;
+}
+
+.about2 h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.about2 p {
+  margin-bottom: 1rem;
+}
+
+.about2 .button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.about2 .button-group a {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about1 {
+    margin-bottom: 1rem;
+  }
+}
+
