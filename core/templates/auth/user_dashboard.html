@@ -1,0 +1,475 @@
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body,
+    html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    .btn {
+      all: unset;
+    }
+
+    /* Layout */
+    #dashboard {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      grid-template-rows: 60px 1fr;
+      grid-template-areas:
+        "sidebar header"
+        "sidebar main";
+      height: 100vh;
+      transition: all 0.3s ease;
+    }
+
+    header {
+      grid-area: header;
+      background: #2f80ed;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 20px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      position: relative;
+    }
+
+    /* Sidebar toggle button */
+    #sidebarToggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-right: auto;
+      padding: 0;
+    }
+
+    #sidebarToggle:focus {
+      outline: 2px solid #90cdf4;
+      outline-offset: 2px;
+    }
+
+    header .profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    header .profile img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid white;
+      object-fit: cover;
+    }
+
+    header .profile span {
+      font-weight: 600;
+    }
+
+    aside {
+      grid-area: sidebar;
+      background: #1f2937;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      padding-top: 20px;
+      box-shadow: 2px 0 8px rgb(0 0 0 / 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    aside.hidden {
+      transform: translateX(-260px);
+      pointer-events: none;
+    }
+
+    aside .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #60a5fa;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    nav {
+      flex-grow: 1;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    nav ul li {
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      border-left: 4px solid transparent;
+      transition: background-color 0.3s ease, border-left-color 0.3s ease;
+    }
+
+    nav ul li:hover,
+    nav ul li.active {
+      background-color: #2563eb;
+      color: white;
+      border-left-color: #60a5fa;
+    }
+
+    nav ul li svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    main {
+      grid-area: main;
+      padding: 25px 30px;
+      overflow-y: auto;
+    }
+
+    /* Dashboard cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card h3 {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #334155;
+    }
+
+    .card p {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    /* Chart container */
+    .chart-container {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      margin-bottom: 30px;
+    }
+
+    .chart-container h2 {
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    /* Activity list */
+    .activity {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+
+    .activity h2 {
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .activity ul {
+      list-style: none;
+    }
+
+    .activity ul li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      color: #475569;
+    }
+
+    .activity ul li:last-child {
+      border: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      #dashboard {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px auto 1fr;
+        grid-template-areas:
+          "header"
+          "sidebar"
+          "main";
+        height: 100vh;
+      }
+
+      aside {
+        grid-area: sidebar;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 10px;
+        box-shadow: none;
+        border-bottom: 1px solid #e2e8f0;
+        transform: translateX(0);
+        pointer-events: auto;
+        position: relative;
+        z-index: 10;
+      }
+
+      aside.hidden {
+        transform: translateX(-100%);
+        pointer-events: none;
+      }
+
+      nav ul {
+        flex-direction: row;
+        gap: 20px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      nav ul li {
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        padding: 10px 12px;
+      }
+
+      nav ul li:hover,
+      nav ul li.active {
+        border-left-color: transparent;
+        border-bottom-color: #60a5fa;
+        background-color: transparent;
+        color: #2563eb;
+      }
+
+      .logo {
+        display: none;
+      }
+
+      #sidebarToggle {
+        display: block;
+      }
+    }
+
+    /* Scrollbar styling for activity and main */
+    main::-webkit-scrollbar,
+    .activity::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    main::-webkit-scrollbar-thumb,
+    .activity::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    main {
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="dashboard" role="main" aria-label="User dashboard">
+    <aside id="sidebar">
+      <div class="logo" aria-label="Dashboard Logo">DashPro</div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li class="active" tabindex="0" aria-current="page">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+              <path
+                d="M3 13h2v-2H3v2zm4 4h2v-6H7v6zM3 17h2v-2H3v2zm4 0h2v-6H7v6zm4 0h2v-10h-2v10zm4-4h2v-2h-2v2zm4-4h2v-2h-2v2zM3 21h18v-2H3v2z">
+              </path>
+            </svg>
+            Dashboard
+          </li>
+          <li tabindex="0">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+              <path
+                d="M19 4h-2V2h-2v2H9V2H7v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM5 18V8h14v10H5z">
+              </path>
+            </svg>
+            Projects
+          </li>
+          <li tabindex="0">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4a4 4 0 0 0 0 8zm-1 1v10h2v-10h-2zm-6-1v2h2v-2H5zm12 0v2h2v-2h-2zM7 7h2V5H7v2zm8 0h2V5h-2v2zm2 7v2h2v-2h-2zm-12 0v2h2v-2H5z">
+              </path>
+            </svg>
+            Team
+          </li>
+          <li tabindex="0">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+              <path
+                d="M3 12h2v-2H3v2zm4 6h2v-10H7v10zm-4 0h2v-2H3v2zm12-8h-2v6h-2v-6h-2v10h6v-10zm6 4h-2v2h2v-2zm-6-10h4v2h-4v-2z">
+              </path>
+            </svg>
+            Settings
+          </li>
+          <li tabindex="0">
+            <?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M17 16L21 12M21 12L17 8M21 12L7 12M13 16V17C13 18.6569 11.6569 20 10 20H6C4.34315 20 3 18.6569 3 17V7C3 5.34315 4.34315 4 6 4H10C11.6569 4 13 5.34315 13 7V8"
+                stroke="#374151" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+            <button class="btn"><a href="{% url 'logout_view' %}" class="btn btn-dark">Logout</a></button>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <header>
+      <button id="sidebarToggle" aria-label="Toggle sidebar" aria-controls="sidebar"
+        aria-expanded="true">&#9776;</button>
+      <div class="profile" tabindex="0" aria-haspopup="true" aria-label="User profile menu">
+        <img src="https://i.pravatar.cc/38" alt="User profile picture" />
+        <span>{{ request.user.first_name }}</span>
+      </div>
+    </header>
+    <main>
+      <section class="cards" aria-label="Dashboard statistics">
+        <article class="card" tabindex="0" aria-live="polite">
+          <h3>Total Sales</h3>
+          <p>$12,345</p>
+        </article>
+        <article class="card" tabindex="0" aria-live="polite">
+          <h3>New Users</h3>
+          <p>1,024</p>
+        </article>
+        <article class="card" tabindex="0" aria-live="polite">
+          <h3>Open Tickets</h3>
+          <p>85</p>
+        </article>
+        <article class="card" tabindex="0" aria-live="polite">
+          <h3>Server Uptime</h3>
+          <p>99.9%</p>
+        </article>
+      </section>
+      <section class="chart-container" aria-label="Sales chart">
+        <h2>Monthly Sales</h2>
+        <canvas id="salesChart" width="400" height="180" aria-hidden="true"></canvas>
+      </section>
+      <section class="activity" aria-label="Recent activity">
+        <h2>Recent Activity</h2>
+        <ul>
+          <li tabindex="0"><span>Jane Doe created a new project "Marketing Campaign"</span> <time
+              datetime="2024-06-10T10:15:00">2 hours ago</time></li>
+          <li tabindex="0"><span>John Smith closed ticket #473</span> <time datetime="2024-06-09T15:00:00">1 day
+              ago</time></li>
+          <li tabindex="0"><span>Lisa Wong joined team "Design"</span> <time datetime="2024-06-08T20:20:00">2 days
+              ago</time></li>
+          <li tabindex="0"><span>Mark Lee updated project "Website Refresh"</span> <time
+              datetime="2024-06-07T14:45:00">3 days ago</time></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle on mobile
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    function updateAria() {
+      const expanded = !sidebar.classList.contains('hidden');
+      sidebarToggle.setAttribute('aria-expanded', expanded);
+    }
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('hidden');
+      updateAria();
+    });
+
+    // Init aria-expanded state
+    updateAria();
+
+    // Chart drawing (simple bar chart using Canvas API)
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const data = [1200, 1900, 3000, 2500, 3200, 2800, 3500, 4000, 3700, 4200, 4500, 4800];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    function drawChart() {
+      const width = ctx.canvas.width;
+      const height = ctx.canvas.height;
+      ctx.clearRect(0, 0, width, height);
+
+      const padding = 40;
+      const barWidth = (width - padding * 2) / data.length * 0.7;
+      const maxData = Math.max(...data);
+      const scaleY = (height - padding * 2) / maxData;
+
+      ctx.fillStyle = '#2563eb';
+      ctx.textAlign = "center";
+      ctx.textBaseline = "bottom";
+      ctx.font = "12px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+
+      for (let i = 0; i < data.length; i++) {
+        const barHeight = data[i] * scaleY;
+        const x = padding + i * ((width - padding * 2) / data.length) + (barWidth / 2);
+        const y = height - padding - barHeight;
+
+        ctx.fillRect(x, y, barWidth, barHeight);
+        ctx.fillStyle = "#334155";
+        ctx.fillText(months[i], x + barWidth / 2, height - padding + 15);
+        ctx.fillStyle = '#2563eb';
+      }
+
+      // Axis lines
+      ctx.beginPath();
+      ctx.moveTo(padding, padding / 2);
+      ctx.lineTo(padding, height - padding);
+      ctx.lineTo(width - padding / 2, height - padding);
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    drawChart();
+  </script>
+
+</body>
+
+</html>
+
+{% endblock content %}

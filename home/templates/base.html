@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}home{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/appliance.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/booking.css' %}">
+</head>
+
+<body>
+    <header class="header mf1-position-relative js-header ">
+        <div class="header__container mf1-container mf1-max-width-lg">
+            <div class="header__logo">
+                
+                <a href="{% url 'home' %}" style="text-decoration: none;"><h3>AppliCare</h3></a>
+            </div>
+
+            <button class="mf1-btn mf1-btn--subtle header__trigger js-header__trigger" aria-label="Toggle menu"
+                aria-expanded="false" aria-controls="header-nav">
+                <i class="header__trigger-icon" aria-hidden="true"></i>
+                <span>Menu</span>
+            </button>
+
+
+            <nav class="header__nav js-header__nav" id="header-nav" role="navigation" aria-label="Main">
+                <div class="header__nav-inner">
+                    <div class="header__label">Main menu</div>
+                    <ul class="header__list">
+                        <li class="header__item"><a href="{% url 'reviews' %}" class="header__link">Reviews</a></li>
+                        <li class="header__item"><a href="{% url 'pricing' %}" class="header__link">Pricing</a></li>
+                        <li class="header__item"><a href="{% url 'about_us' %}" class="header__link">About & Contact us</a></li>
+                        <li class="header__item"><a href="{% url 'book_service' %}" class="header__link">Book-Now</a></li>
+                        <li class="header__item header__item--divider" aria-hidden="true"></li>
+                        <button><a href="{% url 'login_view' %}">login</a></button>
+                        <button><a href="{% url 'register_view' %}">Signup</a></button>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+    {% block content %}
+    {% endblock content %}
+
+
+
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>APPLICARE is a leading provider of home appliances with a mission to deliver quality and innovation to every household.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Products</h3>
+                <ul>
+                    <li><a href="#">Refrigerators</a></li>
+                    <li><a href="#">Washing Machines</a></li>
+                    <li><a href="#">Microwaves</a></li>
+                    <li><a href="#">Air Conditioners</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: support@applicare.com</li>
+                    <li>Phone: +1 800 123 4567</li>
+                    <li>Address: 123 Main St, New York, NY</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 APPLICARE. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script src="{% static 'js/script01.js' %}"></script>
+    <script src="{% static 'js/carousel.js' %}"></script>
+    <script src="{% static 'js/book-form.js' %}"></script>
+</body>
+
+</html>

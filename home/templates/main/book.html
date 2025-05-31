@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}book-now{% endblock %}
+{% block content %}
+
+<div class="farm-container">
+    <h1>Appliance Service Book Form</h1>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Basic Information</h2>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="customer_name" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="customer_address" required>
+            <label for="address">City:</label>
+            <input type="text" id="city" name="customer_city" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="customer_phone" required>
+            <input type="email" id="email" name="customer_email">
+        </div>
+
+        <h2>Appliance</h2>
+        <div class="form-group" id="form-group-1">
+            <label for="skill-1">Appliance name</label>
+            <input type="text" id="skill-1" name="appliance_name" required>
+            <label for="skill-1">Appliance problems</label>
+            <input type="text" id="skill-1" name="problem_type" required>
+        </div>
+
+        <h2>Service Date</h2>
+        <div class="form-group">
+            <label for="service-date">Service Date:</label>
+            <input type="date" id="service-date" name="service_date" required>
+        </div>
+
+        <h2>Additional Information</h2>
+        <div class="form-group">
+            <label for="additional-info">Additional information you'd like to tell:</label>
+            <textarea id="additional-info" name="additional_info"></textarea>
+        </div>
+
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,58 @@
+/* booking.css */
+
+.booking-card {
+  background-color: var(--mf1-color-white-hsl);
+  color: var(--mf1-color-black-hsl);
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: var(--mf1-space-md);
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.booking-card h1,
+.booking-card h2 {
+  color: var(--mf1-color-contrast-higher-hsl);
+  margin-bottom: var(--mf1-space-sm);
+}
+
+.booking-detail {
+  font-size: var(--mf1-text-sm);
+  line-height: 1.7;
+  margin-bottom: var(--mf1-space-sm);
+}
+
+.booking-detail strong {
+  display: inline-block;
+  width: 140px;
+  color: var(--mf1-color-contrast-medium-hsl);
+}
+
+.booking-card .pay-btn {
+  margin-top: var(--mf1-space-md);
+  background-color: var(--mf1-color-primary-hsl);
+  color: var(--mf1-color-white-hsl);
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.booking-card .pay-btn:hover {
+  background-color: var(--mf1-color-primary-light-hsl);
+}
+
+@media (max-width: 768px) {
+  .booking-card {
+    margin: 1rem;
+    padding: var(--mf1-space-sm);
+  }
+
+  .booking-detail strong {
+    width: 120px;
+  }
+}

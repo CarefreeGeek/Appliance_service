@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Payment{% endblock %}
+{% block content %}
+<div class="booking-card">
+    
+    <div style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+        <h1>Thank you, {{ booking.customer_name }}!</h1>
+        <p>Your booking has been recorded.</p>
+        <p><strong>Payment Status:</strong> <span style="color: red;">Pending</span></p>
+        
+        <h2>Amount Due: ₹99</h2>
+        <button type="submit" class="pay-btn">Pay ₹99</button>
+    </div>
+</div>
+
+{% endblock content %}

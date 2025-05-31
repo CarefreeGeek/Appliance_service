@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}Booking Summary{% endblock %}
+{% block content %}
+
+<div class="summary-container" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+    <h1>Booking Summary</h1>
+    <hr>
+
+    <p><strong>Name:</strong> {{ booking.customer_name }}</p>
+    <p><strong>Address:</strong> {{ booking.customer_address }}</p>
+    <p><strong>Phone:</strong> {{ booking.customer_phone }}</p>
+    <p><strong>Email:</strong> {{ booking.customer_email }}</p>
+    <p><strong>Appliance Name:</strong> {{ booking.appliance_name }}</p>
+    <p><strong>Problem:</strong> {{ booking.problem_type }}</p>
+    <p><strong>Service Date:</strong> {{ booking.service_date }}</p>
+    <p><strong>Additional Info:</strong> {{ booking.additional_info }}</p>
+
+    <hr>
+    <h2>Amount to Pay: ₹99</h2>
+
+    <button type="submit" id="rzp-button"
+        style="padding: 10px 20px; font-size: 16px; background-color: green; color: white; border: none; border-radius: 5px;">
+        Pay ₹99
+    </button>
+
+
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        const options = {
+            "key": "{{ razorpay_key_id }}", // Passed from Django view
+            "amount": 9900, // Amount in paise (₹99)
+            "currency": "INR",
+            "name": "APPLICARE",
+            "description": "Service Booking",
+            "image": "https://yourdomain.com/static/logo.png", // optional
+            "handler": function (response) {
+                // AJAX call to save payment info on your server
+                fetch('/save-payment/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: new URLSearchParams({
+                        'razorpay_payment_id': response.razorpay_payment_id,
+                        'booking_id': '{{ booking.id }}',
+                        'amount': '99'
+                    })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'saved') {
+                            alert("Payment successful and saved!");
+                            window.location.href = "/submition/";
+                        } else {
+                            alert("Payment saved failed!");
+                        }
+                    })
+                    .catch(() => {
+                        alert("Payment succeeded but saving info failed. Please contact support.");
+                    });
+            },
+            "prefill": {
+                "name": "{{ booking.customer_name }}",
+                "email": "{{ booking.customer_email }}",
+                "contact": "{{ booking.customer_phone }}"
+            },
+            "theme": {
+                "color": "#0a5dc2"
+            }
+        };
+        const rzp = new Razorpay(options);
+        document.getElementById('rzp-button').onclick = function (e) {
+            rzp.open();
+            e.preventDefault();
+        }
+    </script>
+
+
+
+    <!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        const options = {
+            "key": "{{ razorpay_key_id }}", // Passed from Django view
+            "amount": 9900, // Amount in paise (₹99)
+            "currency": "INR",
+            "name": "APPLICARE",
+            "description": "Service Booking",
+            "image": "https://yourdomain.com/static/logo.png", // optional
+            "handler": function (response) {
+                // response.razorpay_payment_id
+                alert("Payment successful!");
+                window.location.href = "/submition/"; // redirect or AJAX call
+            },
+            "prefill": {
+                "name": "{{ booking.customer_name }}",
+                "email": "{{ booking.customer_email }}",
+                "contact": "{{ booking.customer_phone }}"
+            },
+            "theme": {
+                "color": "#0a5dc2"
+            }
+        };
+        const rzp = new Razorpay(options);
+        document.getElementById('rzp-button').onclick = function (e) {
+            rzp.open();
+            e.preventDefault();
+        }
+    </script> -->
+
+</div>
+
+{% endblock content %}

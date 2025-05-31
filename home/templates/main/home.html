@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}home{% endblock %}
+{% block content %}
+<div class="reviews_main">
+<main class="main">
+  <section class="section banner banner-section">
+    <div class="container banner-column">
+      <img class="banner-image" src="{% static 'images/home-appliances-png-28237.png' %}" alt="Illustration">
+      <div class="banner-inner">
+        <h1 class="heading-xl">AppliCare Home appliance Services in One Location.</h1>
+        <p class="paragraph">We are here to keep your appliances running smoothly with fast, reliable, and expert
+          service. From repairs to maintenance, we'll get you covered—because your comfort is our priority!</p>
+        <button>
+          Book Now<div class="arrow-wrapper">
+            <div class="arrow"></div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section>
+  <div class="about" id="about">
+    <div class="about1">
+      <img src="https://assets.nicepagecdn.com/d2cc3eaa/2625074/images/g.jpg" alt="About Company">
+    </div>
+    <div class="about2">
+      <h2>About Company</h2>
+      <p>At [Your Company Name], we’re all about keeping your home running smoothly without the hassle. Got a leaky
+        dishwasher or a fridge that’s on the fritz? We’re the quick, reliable team you can count on to get things
+        working again – fast. Our skilled technicians handle all kinds of appliance repairs, big or small, with a focus
+        on quality service and a friendly touch. We’re here to save your day (and your appliances), one speedy fix at a
+        time.</p>
+      <div>
+        <a href="{% url 'book_service' %}"><button>Book now</button></a>
+      </div>
+      <div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  {% include 'main/services.html' %}
+</section>
+
+{% include "main/reviews.html" %}
+
+{% endblock content %}
+
