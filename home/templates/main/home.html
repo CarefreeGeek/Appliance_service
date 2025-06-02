@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %}home{% endblock %}
 {% block content %}
-<div class="reviews_main">
 <main class="main">
   <section class="section banner banner-section">
     <div class="container banner-column">
@@ -10,7 +9,12 @@
       <div class="banner-inner">
         <h1 class="heading-xl">AppliCare Home appliance Services in One Location.</h1>
         <p class="paragraph">We are here to keep your appliances running smoothly with fast, reliable, and expert
-          service. From repairs to maintenance, we'll get you covered—because your comfort is our priority!</p>
+          service. From repairs to maintenance, we'll get you covered—because your comfort is our priority!
+          <br>
+          <br>
+          Our team of skilled technicians is equipped with the latest tools and technology to diagnose and fix any issue
+          with Trusted by thousands of customers for our reliable and efficient solutions
+        </p>
         <button>
           Book Now<div class="arrow-wrapper">
             <div class="arrow"></div>
@@ -37,7 +41,7 @@
         <a href="{% url 'book_service' %}"><button>Book now</button></a>
       </div>
       <div>
-
+        <a href="{% url 'login_view' %}">Be Our Family</a>
       </div>
     </div>
   </div>
@@ -50,4 +54,3 @@
 {% include "main/reviews.html" %}
 
 {% endblock content %}
-

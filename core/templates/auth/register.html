@@ -77,9 +77,9 @@
                                     <p>Please Register your account</p>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <label for="{{ form.username.id_for_label}}">Username:</label>
-                                        <input type="text" name="{{ form.username.name }}" class="form-control"
-                                            value="{{ form.username.value}}" required />
+                                        <label for="{{ form.username.id_for_label}}">User Email:</label>
+                                        <input type="email" name="{{ form.username.name }}" class="form-control"
+                                            value="{{ form.username.value}}" placeholder="example@gmail.com" required />
                                         {% if form.username.errors %}
                                         <span class="text-danger">{{ form.username.errors }}</span>
                                         {% endif %}
@@ -88,7 +88,7 @@
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label for="{{ form.username.id_for_label}}">Full Name:</label>
                                         <input type="text" name="{{ form.first_name }}" class="form-control"
-                                            value="{{ form.first_name.value}}" required />
+                                            value="{{ form.first_name.value}}" required placeholder="example: Ritik Singh" />
                                         {% if form.username.errors %}
                                         <span class="text-danger">{{ form.first_name.errors }}</span>
                                         {% endif %}
@@ -98,15 +98,15 @@
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label for="{{ form.password1.id_for_label}}">Password:</label>
                                         <input type="password" name="{{ form.password1.name }}" class="form-control"
-                                            value="{{ form.password1.value}}" />
+                                            value="{{ form.password1.value}}" placeholder="password" />
                                         <span class="text-danger">{{ form.password1.errors }}</span>
                                     </div>
 
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <label for="{{ form.password2.id_for_label}}">Re-Type Password:</label>
+                                        <label for="{{ form.password2.id_for_label}}">Conform Password:</label>
                                         <input type="password" name="{{ form.password2.name }}" class="form-control"
-                                            value="{{ form.password2.value}}" />
+                                            value="{{ form.password2.value}}" placeholder="password" />
                                         <span class="text-danger">{{ form.password2.errors }}</span>
                                     </div>
 

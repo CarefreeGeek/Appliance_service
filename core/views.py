@@ -16,7 +16,7 @@ def register_view(request):
             login(request,user)
             return render (request,'auth/user_dashboard.html')
     else:
-        initial_data = {'username':'', 'password1':'','password2':""}
+        initial_data = {'username':'', 'first_name':'', 'password1':'','password2':""}
         form = UserCreationForm(initial=initial_data)
     return render(request, 'auth/register.html',{'form':form})
 
@@ -51,3 +51,4 @@ def mac_dashboard(request):
 
 def user_dashboard(request):
     return render(request, 'auth/user_dashboard.html')
+

@@ -58,12 +58,13 @@
                                 </div>
 
                                 <form method="POST" action="{% url 'login_view' %}">
+                                    {% csrf_token %}
                                     <p>Please login to your account</p>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <label for="{{ form.username.id_for_label}}">Username:</label>
+                                        <label for="{{ form.username.id_for_label}}">User email:</label>
                                         <input type="text" name="{{ form.username.name }}" class="form-control"
-                                            value="{{ form.username.value}}" />
+                                            value="{{ form.username.value}}" placeholder="example@gmail.com" />
                                         {% if form.username.errors %}
                                         <span class="text-danger">{{ form.username.errors }}</span>
                                         {% endif %}
@@ -72,7 +73,7 @@
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label for="{{ form.password.id_for_label}}">Password:</label>
                                         <input type="password" name="{{ form.password.name }}" class="form-control"
-                                            value="{{ form.password.value}}" />
+                                            value="{{ form.password.value}}" placeholder="password" />
                                         <span class="text-danger">{{ form.password.errors }}</span>
                                     </div>
 

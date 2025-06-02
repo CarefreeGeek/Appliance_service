@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block title %}reviews{% endblock %}
 {% block content %}
+
+
 <section id="reviews" class="mf1-container mf1-max-width-lg" style="padding: 3rem 1rem;">
   <header class="review-header" style="text-align: center; margin-bottom: 2rem;">
     <h1 class="services-title">What Our Customers Say</h1>
@@ -41,6 +41,20 @@
 
     <div class="review-card">
       <div class="reviewer">
+        <img src="https://i.pravatar.cc/100?img=17" alt="Customer Photo">
+        <div>
+          <h3>Akash</h3>
+          <p class="location">Prayagraj, UP</p>
+        </div>
+      </div>
+      <p class="review-text">
+        "Booking was smooth and AC repair was excellent. All parts are faired price. Strongly recommended!"
+      </p>
+      <div class="rating">⭐⭐⭐⭐⭐</div>
+    </div>
+
+    <div class="review-card">
+      <div class="reviewer">
         <img src="https://i.pravatar.cc/100?img=7" alt="Customer Photo">
         <div>
           <h3>Ritik Yadav</h3>
@@ -55,59 +69,5 @@
   </div>
 </section>
 
-
-<section class="about mf1-container mf1-max-width-lg">
-  <div class="about1">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAkFBMVEX///82MjMzLzAlICEuKSowLC34+Ph9e3wfGRvY19cqJSbd3d0jHh8eGBj09PP7+/vGxcWOjI1IRkbk5ORnZWUbFBasq6tiYGFPTE3q6up2dHW/vr9vbW6gn5+5ubk+OjuamZnOzc2Fg4Q7NzgMAACxsLBbWFlDQEGNi4yWlJWnpqZNSkufnZ4AAAAVDQ5UUlG+mv9QAAALHklEQVR4nO2c6WKiOhiGzQYaEfcFN1SKqO3U+7+7k4UlIFSt1lbP9/yYGSmGvCT5tqRTqwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALwC60H7t7vwszQYGb+0xAbGiL+yRCkQvbJELfCFJTaYFviyEhs0EfiiEk2BLykxEUj5i67FRKBj9wP2ihIzgbVaHycSf7tXd6QRT01iy08eiiVuX2YUkxHUAg2JrzJREz+YCBQS8UtJTCKZTKCQ+ErmJhHo2ObVvv8yEpMpmhdoSNz+Tr/uRpVAITF6iVE0/WCRl5D4lcCXWItfC3wBiecEConP7TTOC3xy15+PRat44gCuGItW8bQST2PRKp50opbFolU8ZYxaHotW8YROozpUK+fpopsSgZbr9RXNhL6l713KP59MYsEPdlab+XYS+QhhjBlNYJOR0DgjbzN501NJLAi0W5wyhiUoByPRZu5gvlO33bQW+7NO/17d759tqSCw8SnF8ASi0GKYvVqtIprUbqLv1lE7c+o4eLKZNa9VU9r/xrkbCqFaSMS/x6uF4CAYjcIwHB25vAXLtuZ8EK/NZTy2fLDWdE6YxSwzwr1PqGqNEmdzD4kXCkz94AdH5HBy20COIh6+vb1RhPW46n7q6XsNPJv89ELTfVeBtR1lJWWKhiOVHMSwHAur8xYeoLAkVNtQNj+9sdmSCkMxN8cMKSuEmQCn229IfS5CyzA2tKa/ILC257jnntzZlQsRoygSTiKYSI6KbWxREd4OxuPxIGYeM42xFRvJbh4RKRILaxasflpgWSw6IohOPcvN8DxvQdR6k3Z5mt+9SFLisoGvwOrMkeP440Xj9E3el/JYtNOSG2q9Xi+K/CDAmFLO61yr2I0Oox7NL9Nv+UVvufbuouFLKmJRtyUv45TMLmBOprYIBgqj9Wejm8pge8lahJtoI++0kN2UA/+2KHzhj0pcDx3V8eGpwXYby8W+293v96uVdPvK6S9n8arpL63iF/q+butz+9ML6xpkxwWH8B7vva9bOxw6d2gMAP5fuNuxZHJzErOXDR3vkgvdl/WnCh7ry1sbsrlo5jPL0/bvIqiL1rc2ewlfv9aDDlV499bH2DKRqmcKN1yECvVHGNZ28OV73OgMjx1vfc6JQvnZeYDC9tz5Kh5ub+O8wLn1QScK6yJJ+nzEGEb484sA1+JxwFm/1UYUFYab3W63OVc/uQdzyk8LEimNVqyQzG58TlHh41iIbLb6pyFJUu3Vjc/5PYUdgpzqauJO9kuWBFnFiby2VxW0evno+zKFrlcemFddL8Mq3NvgiFQ7O2lomK2SQfOyJ2sO00NtPQ9QsDGkWLoUUevbPkJzc4GfrEPVRE7xehohFETTonFvbKIAId/OmYKVfNDcrbm2b85Bb/8u750bJqzPEK0u9shJSpa+GERuDnTzTRhCMt04VDg1YpxGdGUZib8v1A+4b0gsKtw5RVtq16nKp2k9n61t0uumwRgT8f03z2OcBdnVg8PjezMP4Yrh8asEqvIZ996FQtIpXkcsrok5Wb4rWlOZvk6dudHVokJVtzL9oe2klYJcFbhbTwsILWN0VXW23n9nyOh++Jm1kT67HWDEqvyFNDTCEI1Fa/zjVCGa91QVeJLO01ghHRxVpMCzhs8pXKvOUaa/l03IprrOiWzXrNIqhWwqbs8UukPVBlcubpi2IRSSqrBmz5WNkfEHGxQVMpmu698mSWewUoiR+CzfCnIyH3NOoewr4qG7kNeNirq6jy6WageEZsqVQvGSMaXpLB3JRUXtRqg6tTcVVpkaaWioXTvIoYyKClU1WgVf9fQNaYVy6Ss/w7P5e06hqo++t2ttinKFbrlCpKFYkvz9g7jw05sOerlr2NOvi03iq3KWZnILEO0JO/JvbJiaTKF+5ekbyhTOnNx7PKfQVdtZcp7IWZHV6tqfTJgs0cxaGb2woFC9wnSN+OotiY8rLmeS0acqY9of6u43ZO/MqZwpPFQp7FynUD1KKZRVSpoqdI/b43twSBSO8goL4Zh8OcoofEiFOFbufeHO1TiIiNQLcG5tXKLwyjHMFPqB7yMjG2hbrgweOrxE4TBvIlOFC1OhHJ+q3GjP43ndixfDIxR6kmIEI5w+vkwhCrbjsexvqlCOPn4vVygNDX53dXN4kv3gJxWWMNty7XkvUYjkfhcyFMYurxS1ISgnTFe6nSBr7qEKm2PCMIkuVYjTXbtYoTT3FQo95UCR7/uBaj7r3iMVdjhF2AnXF69Dt9bWxFfHrHKWdnQclWy9GKb6JxWqzbpsHTYdGRSvy21plaUxsVRqVG5pPpIEX2O44Z9U6LRarc/MuEtbIIVdpbCzXwn0ReXqKla4DhHSDTQjKvxZf2h6fBmWYuReqXA1lBti+mJIUOVpAGmSsN8Us6Z9VP9M28sUflSOIblKoVehUIaaqtOXKAzyHl9fnKuAd1Um0CPZwKnwk6f9yxTa94pLld2WmaaKS1Pfq3x3dOEYKu8mb94p2697pB1paZlJRaPxs0KSGyqdW8gfobLcIrLiHhgKzilUuYjIHZTNzF65XgVhzVXtnVG4Ut8N214vC9SUCmNwTFRQHaeFWu0upxDRwX4s+32SH7Jjd6qs1BX5YSgTXRxNfZxzTB2V/9JxpFy+EYeWKWzq/PAYGG9DPRex0jLP3BiFPskZJK0QU64CfJKttiQD5qpdaoSX5xS2J+plqXCEZ5ZPpj7y0dyW42Ks6zKFNZto9ya/gdRrVyF1lTv05eHDJOck8vxPlLwJpRCPj6pBGmUvKF6HA0c9xEhYhULRwtCo0xT3Lfo9ov0uJu9Gx2dD1UXizUUDRllkoNorKGyP6/GxCU71ow56kpZuu3jKVyS9n6h3m/RYW5pNe08cMjR33hJLc8B10gpydSY5RC1jDE/2LdwuHhLiDNE+N6VmQZ3U0bq2zxca1Bi2Tsovh0gePqhzW//E6ul4tnz3wFKUfchsqTsLc2s4taXWOlxbla3VZFIkyRdbrcYynDWLpxxEUx0r+UJle2m7/dlymZ4zGumKNi8V+BWZtyiQeYs/gXYV3zn99ywKuzruHF6/EfskChu61Jorol3IcyiMzQz6zhb9IxV2RonZmO2u28TUUce3hrDW/CcPg5VU6Fx1vK1yl+AbdP4N47ih/Y+TTePy81mreO+z/p2tT0+e4Co7v2Wpc2Lh6Q++zaLO/HjojgTT+qTbuWynbaQrFCLiu2NvfgJvK0LShXJ81ogyhLlDeuPpRp4a7G42m0XFluQo2b3mf/AMTwHvnTlHbe8bW0cXm+QenkD+1RqUbfCukp0sp3gQ9C8iEhtGNmpqtg8BKf4iAEUn7s6aprvzFQXKP8ZeDAgP9Op2F4FT/FWkoBCeNiZJhYlFDzhJfQ/mMtMnW73krDAqaKRH0/ZYXR4fAhJp3G8cjfgO1lYOCiPz2GqEhXGkk2wthn5aIsQVOcVfxNK/VUWdeTwofWYqFBnySg2jd/CzdYqdWw8BPZSBth106Gv/sM1LRPwzGozx0PiNqWcaQUU3Tt8xb4nZmh5lysCMmVOXomdZgykzlv0mXOtUYAFyfBIrauINTnxhFYzcfCD2dxB28hKNmEwecvj4J/C6jJ/Vx9GipIDzNPQ3/MtxxAR3n3AF5uh3kcMq9NF6tHp2fRI3HNQJLY6kyKu4PXvm+ZnDC6dsSPT/CsAY5aQ+FLnxy8iLaS4/7PFxMtkONotl49XUAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADw/+E/ZufEp8rlKzwAAAAASUVORK5CYII=" alt="Applicare Team" width="250" height="250" />
-  </div>
-  <div class="about2">
-    <h2>About Applicare</h2>
-    <p>
-      Applicare is dedicated to making home appliance repairs stress-free and reliable. Based in Banaras, we proudly serve households across Uttar Pradesh with quick, transparent, and expert service.
-    </p>
-    <p>
-      Whether it’s your refrigerator, washing machine, or microwave – our certified technicians deliver top-quality service with a human touch.
-    </p>
-    <div class="button-group">
-      <a href="#">
-        <button>Contact Us</button>
-      </a>
-      <a href="{% url 'book_service' %}">
-        <button>Book a Service</button>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-
-<section class="mf1-container mf1-max-width-lg" style="padding: 4rem 1rem;">
-  <div style="text-align: center; margin-bottom: 2rem;">
-    <h2 class="services-title">Get in Touch</h2>
-    <p class="mf1-text-sm" style="color: var(--mf1-color-contrast-medium-hsl);">
-      Have a question or need help with a service? We’re here for you.
-    </p>
-  </div>
-
-  <form class="contact-form" method="POST" action="#">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="name">Full Name</label>
-      <input type="text" name="name" id="name" required>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email Address</label>
-      <input type="email" name="email" id="email" required>
-    </div>
-
-    <div class="form-group">
-      <label for="message">Your Message</label>
-      <textarea name="message" id="message" rows="5" required></textarea>
-    </div>
-
-    <button type="submit">Send Message</button>
-  </form>
-</section>
 
 {% endblock content %}
