@@ -4,13 +4,10 @@ from django.shortcuts import redirect, render
 from home.models import Payment, ServiceBooking, Customer
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from core.views import user_dashboard
 
 # Create your views here.
 def home(request):
     return render(request, 'main/home.html')
-
-
 
 def book_service(request):
     if request.method == 'POST':
@@ -20,6 +17,8 @@ def book_service(request):
         # Baaki fields ka bhi check kar sakte hain yahan
 
         booking = ServiceBooking.objects.create(
+            user = request.user,
+            
             customer_name=customer_name,
             customer_address=request.POST.get('customer_address', ''),
             customer_city=request.POST.get('customer_city', ''),
@@ -32,8 +31,6 @@ def book_service(request):
         )
         return redirect('booking_summary', booking_id=booking.id)
     return render(request, 'main/book.html')
-
-
 
 def booking_summary(request, booking_id):
     booking = get_object_or_404(ServiceBooking, id=booking_id)
@@ -65,10 +62,6 @@ def submition(request):
     return render(request, 'main/submission.html')
 
 
-
-
-
-
 def pricing(request):
     return render(request, 'main/pricing.html')
 
@@ -81,13 +74,3 @@ def about_us(request):
 
 def user_dashboard(request):
     return render(request, 'main/user_dashboard.html')
-
-
-
-# def user_dashboard(request):
-#     if request.method == 'GET':
-#         customer = Customer.objects.get(email=request.user.email)
-#         return render(request, 'main/user_dashboard.html', {'customer': customer})
-#     else:
-#         return render(request, 'main/user_login.html', {'error': 'Something went wrong'})
-

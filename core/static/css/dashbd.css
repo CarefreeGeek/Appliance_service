@@ -1,0 +1,410 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+}
+
+.btn {
+    all: unset;
+}
+
+/* Layout */
+#dashboard {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas:
+        "sidebar header"
+        "sidebar main";
+    height: 100vh;
+    transition: all 0.3s ease;
+}
+
+header {
+    grid-area: header;
+    background: #2f80ed;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    position: relative;
+}
+
+/* Sidebar toggle button */
+#sidebarToggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: auto;
+    padding: 0;
+}
+
+#sidebarToggle:focus {
+    outline: 2px solid #90cdf4;
+    outline-offset: 2px;
+}
+
+header .profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+header .profile img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+header .profile span {
+    font-weight: 600;
+}
+
+aside {
+    grid-area: sidebar;
+    background: #1f2937;
+    color: #cbd5e1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    box-shadow: 2px 0 8px rgb(0 0 0 / 0.05);
+    transition: transform 0.3s ease;
+}
+
+aside.hidden {
+    transform: translateX(-260px);
+    pointer-events: none;
+}
+
+aside .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #60a5fa;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+nav {
+    flex-grow: 1;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+nav ul li {
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    border-left: 4px solid transparent;
+    transition: background-color 0.3s ease, border-left-color 0.3s ease;
+}
+
+nav ul li:hover,
+nav ul li.active {
+    background-color: #2563eb;
+    color: white;
+    border-left-color: #60a5fa;
+}
+
+nav ul li svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+main {
+    grid-area: main;
+    padding: 25px 30px;
+    overflow-y: auto;
+}
+
+/* Dashboard cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card h3 {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #334155;
+}
+
+.card p {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+/* Chart container */
+.chart-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    margin-bottom: 30px;
+}
+
+.chart-container h2 {
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #334155;
+}
+
+/* Activity list */
+.activity {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+.activity h2 {
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.activity ul {
+    list-style: none;
+}
+
+.activity ul li {
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    color: #475569;
+}
+
+.activity ul li:last-child {
+    border: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    #dashboard {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px auto 1fr;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main";
+        height: 100vh;
+    }
+
+    aside {
+        grid-area: sidebar;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 10px;
+        box-shadow: none;
+        border-bottom: 1px solid #e2e8f0;
+        transform: translateX(0);
+        pointer-events: auto;
+        position: relative;
+        z-index: 10;
+    }
+
+    aside.hidden {
+        transform: translateX(-100%);
+        pointer-events: none;
+    }
+
+    nav ul {
+        flex-direction: row;
+        gap: 20px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    nav ul li {
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        padding: 10px 12px;
+    }
+
+    nav ul li:hover,
+    nav ul li.active {
+        border-left-color: transparent;
+        border-bottom-color: #60a5fa;
+        background-color: transparent;
+        color: #2563eb;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    #sidebarToggle {
+        display: block;
+    }
+}
+
+/* Scrollbar styling for activity and main */
+main::-webkit-scrollbar,
+.activity::-webkit-scrollbar {
+    width: 8px;
+}
+
+main::-webkit-scrollbar-thumb,
+.activity::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px;
+}
+
+main {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+
+
+
+/* Modal Backdrop */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Ensure it's above other content */
+    visibility: hidden;
+    /* Hidden by default */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.modal-backdrop.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Modal Content Box */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    /* Max width for larger screens */
+    position: relative;
+    transform: translateY(-20px);
+    /* Slight animation when appearing */
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal-backdrop.show .modal-content {
+    transform: translateY(0);
+}
+
+/* Close Button */
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: #555;
+    padding: 0;
+}
+
+.modal-close-button:hover {
+    color: #000;
+}
+
+/* Modal Header/Title */
+.modal-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Modal Body */
+.modal-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-body ul li {
+    margin-bottom: 10px;
+}
+
+.modal-body ul li a {
+    text-decoration: none;
+    color: #2563eb;
+    /* Or your preferred link color */
+    font-size: 1.1em;
+    display: block;
+    /* Make the whole list item clickable area */
+    padding: 5px 0;
+}
+
+.modal-body ul li a:hover {
+    color: #1a4ed8;
+    text-decoration: underline;
+}
+
+/* Optional: Body overflow when modal is open */
+body.modal-open {
+    overflow: hidden;
+}
+
+
+
+
+
+
+

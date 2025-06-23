@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password, check_password
 
 class ServiceBooking(models.Model):
@@ -21,10 +22,12 @@ class ServiceBooking(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='service_bookings')
+
     def __str__(self):
         return f"{self.customer_name} - {self.appliance_name} ({self.service_date})"
-
-
+    
 # models.py
 class Payment(models.Model):
     booking = models.ForeignKey(ServiceBooking, on_delete=models.CASCADE)
@@ -43,3 +46,4 @@ class Customer(models.Model):
     password = models.CharField(max_length=128)
     def __str__(self):
         return self.full_name
+    

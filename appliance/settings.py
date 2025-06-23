@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     'core',
     'home',
+    'widget_tweaks',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
