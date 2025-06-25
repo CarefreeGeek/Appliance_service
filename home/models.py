@@ -9,17 +9,11 @@ class ServiceBooking(models.Model):
     customer_city = models.TextField(max_length=100, null=True, blank=True)
     customer_phone = models.CharField(max_length=15)
     customer_email = models.EmailField(blank=True)
-
-    # Appliance Details
     appliance_name = models.CharField(max_length=100)
     problem_type = models.TextField()
-
-    # Service Date
     service_date = models.DateField()
-
-    # Additional Information
     additional_info = models.TextField(blank=True, null=True)
-
+    assigned = models.BooleanField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

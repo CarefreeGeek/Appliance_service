@@ -17,6 +17,7 @@ class Employee(models.Model):
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     service_name = models.CharField(max_length=100)
+    assigned = models.BooleanField(blank=True, null=True)
     date = models.DateTimeField()
     status = models.CharField(max_length=20, choices=[('scheduled', 'Scheduled'), ('done', 'Done'), ('canceled', 'Canceled')])
 

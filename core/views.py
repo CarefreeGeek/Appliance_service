@@ -19,7 +19,7 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request,user)
-            return render (request,'auth/user_dashboard.html')
+            return render (request,'auth/login.html')
     else:
         initial_data = {'username':'', 'first_name':'', 'password1':'','password2':""}
         form = UserCreationForm(initial=initial_data)
@@ -43,15 +43,20 @@ def login_view(request):
 
 @auth
 def dashboard_view(request):
+    bookings = ServiceBooking.objects.filter(user=request.user).order_by('-created_at')[:5]
+
     context = {
         'user': request.user,
-        'bookings_count': ServiceBooking.objects.filter(user=request.user).count()
+        'bookings_count': ServiceBooking.objects.filter(user=request.user).count(),
+        'user_bookings': bookings
     }
+
     return render(request, 'auth/user_dashboard.html', context)
+
 
 def logout_view(request):
     logout(request)
-    return redirect('login_view')
+    return redirect('home')
 
 
 def mac_dashboard(request):

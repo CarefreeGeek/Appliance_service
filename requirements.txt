@@ -3,3 +3,4 @@ gunicorn
 asgiref
 sqlparse
 tzdata
+django-widget-tweaks
